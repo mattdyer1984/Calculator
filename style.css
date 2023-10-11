@@ -1,4 +1,5 @@
 body {
+    width: 320px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -8,16 +9,23 @@ body {
 }
 
 button {
-    width: 50px;
-    height: 50px;
-    font-size: 35px;
+    width: 75px;
+    height: 75px;
+    font-size: 42px;
+    background-color: slategray;
+    color: white;
+}
+
+.operator {
+    background-color: coral;
+    color: white;
 }
 
 #display {
-    font-size: 35px;
+    font-size: 42px;
     font-weight: bolder;
     border: 1px solid slategray;
-    width: 210px;
-    height: 50px;
+    width: 310px;
+    height: 75px;
     margin-bottom: 8px;
 }
