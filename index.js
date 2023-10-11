@@ -30,34 +30,37 @@ clear.addEventListener("click", () => {
 });
 
 function calculateLeftToRight(htmlContent) {
+    if (htmlContent.includes("/0")) {
+        return "Can't divide by 0";
+    }
+
     const numbers = htmlContent.split(/\+|\-|\*|\//);
     const operators = htmlContent.replace(/\d+/g, "").split("").filter(Boolean);
     console.log(numbers);
     console.log(operators);
     let result = parseFloat(numbers[0]);
-  
+
     for (let i = 0; i < operators.length; i++) {
-      const nextNumber = parseFloat(numbers[i + 1]);
-      if (operators[i] === "+") {
-        result += nextNumber;
-      } else if (operators[i] === "-") {
-        result -= nextNumber;
-      } else if (operators[i] === "*") {
-        result *= nextNumber;
-      } else if (operators[i] === "/") {
-        result /= nextNumber;
-      }
+        const nextNumber = parseFloat(numbers[i + 1]);
+        if (operators[i] === "+") {
+            result += nextNumber;
+        } else if (operators[i] === "-") {
+            result -= nextNumber;
+        } else if (operators[i] === "*") {
+            result *= nextNumber;
+        } else if (operators[i] === "/") {
+            result /= nextNumber;
+        }
     }
-  
+
     if (Number.isInteger(result)) {
-      return result.toString();
+        return result.toString();
     } else {
-      const resultString = result.toFixed(6);
-      if (resultString.length > 10) {
-        return result.toExponential(6); 
-      } else {
-        return resultString;
-      }
+        const resultString = result.toFixed(6);
+        if (resultString.length > 10) {
+            return result.toExponential(6);
+        } else {
+            return resultString;
+        }
     }
-  }
-  
+}
