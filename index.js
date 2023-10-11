@@ -13,7 +13,7 @@ for (let i of btns) {
     const currentValue = display.innerHTML;
     const newValue = currentValue + this.value;
 
-    if (newValue.length <= 10) {
+    if (newValue.length <= 14) {
       display.innerHTML = newValue;
     }
   });
@@ -30,28 +30,34 @@ clear.addEventListener("click", () => {
 });
 
 function calculateLeftToRight(htmlContent) {
-  const numbers = htmlContent.split(/\+|\-|\*|\//);
-  const operators = htmlContent.replace(/\d+/g, "").split("").filter(Boolean);
-  console.log(numbers);
-  console.log(operators);
-  let result = parseFloat(numbers[0]);
-
-  for (let i = 0; i < operators.length; i++) {
-    const nextNumber = parseFloat(numbers[i + 1]);
-    if (operators[i] === "+") {
-      result += nextNumber;
-    } else if (operators[i] === "-") {
-      result -= nextNumber;
-    } else if (operators[i] === "*") {
-      result *= nextNumber;
-    } else if (operators[i] === "/") {
-      result /= nextNumber;
+    const numbers = htmlContent.split(/\+|\-|\*|\//);
+    const operators = htmlContent.replace(/\d+/g, "").split("").filter(Boolean);
+    console.log(numbers);
+    console.log(operators);
+    let result = parseFloat(numbers[0]);
+  
+    for (let i = 0; i < operators.length; i++) {
+      const nextNumber = parseFloat(numbers[i + 1]);
+      if (operators[i] === "+") {
+        result += nextNumber;
+      } else if (operators[i] === "-") {
+        result -= nextNumber;
+      } else if (operators[i] === "*") {
+        result *= nextNumber;
+      } else if (operators[i] === "/") {
+        result /= nextNumber;
+      }
+    }
+  
+    if (Number.isInteger(result)) {
+      return result.toString();
+    } else {
+      const resultString = result.toFixed(6);
+      if (resultString.length > 10) {
+        return result.toExponential(6); 
+      } else {
+        return resultString;
+      }
     }
   }
-
-  if (Number.isInteger(result)) {
-    return result.toString();
-  } else {
-    return result.toFixed(5);
-  }
-}
+  
