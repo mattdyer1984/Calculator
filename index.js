@@ -10,11 +10,14 @@ function reloadDOM() {
 
 for (let i of btns) {
   i.addEventListener("click", function () {
-    display.innerHTML += this.value;
+    const currentValue = display.innerHTML;
+    const newValue = currentValue + this.value;
+
+    if (newValue.length <= 10) {
+      display.innerHTML = newValue;
+    }
   });
 }
-
-let htmlContent = display.innerHTML;
 
 submit.addEventListener("click", function () {
   htmlContent = display.innerHTML;
@@ -29,8 +32,8 @@ clear.addEventListener("click", () => {
 function calculateLeftToRight(htmlContent) {
   const numbers = htmlContent.split(/\+|\-|\*|\//);
   const operators = htmlContent.replace(/\d+/g, "").split("").filter(Boolean);
-    console.log(numbers)
-    console.log(operators)
+  console.log(numbers);
+  console.log(operators);
   let result = parseFloat(numbers[0]);
 
   for (let i = 0; i < operators.length; i++) {
@@ -45,5 +48,10 @@ function calculateLeftToRight(htmlContent) {
       result /= nextNumber;
     }
   }
-  return result;
+
+  if (Number.isInteger(result)) {
+    return result.toString();
+  } else {
+    return result.toFixed(5);
+  }
 }
